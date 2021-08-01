@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "evernote-analyzer".freeze
-  s.version = "0.0.9"
+  s.version = "0.0.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5".freeze) if s.respond_to? :required_rubygems_version=
   s.authors = ["Jaden Li".freeze]
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.executables << 'evernote-analyzer'
   s.add_dependency "sqlite3"
 
-  s.homepage = "https://github.com/imjaden/evernote-analyzer.git".freeze
+  s.homepage = "https://github.com/imjaden/EvernoteAnalyzer.git".freeze
   s.licenses = ["MIT".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.0.0".freeze)
   s.rubygems_version = "3.1.0".freeze

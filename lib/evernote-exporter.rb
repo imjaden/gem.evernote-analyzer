@@ -47,7 +47,7 @@ class EvernoteExporter
         note_index = 1
         note_count = sqlite3_db_connection.execute(sql_note_count).to_a.flatten[0]
         sqlite3_db_connection.prepare(sql_note_list).execute.each_hash do |record|
-          filesize_hash = _local_note_filesize(record['uuid'])
+          filesize_hash = _local_note_filesize(local_account_path, record['uuid'])
           csv_row << [record['zstack'], record['zname'], record['title'], record['updated_at'], record['note_size'], filesize_hash[:local_note_size], filesize_hash[:local_note_size_human], filesize_hash[:local_note_path]]
           set_progress(note_index, note_count, account_id)
           note_index += 1
@@ -67,13 +67,13 @@ class EvernoteExporter
       $stdout.flush
     end
 
-    def _local_note_path(uuid)
-      "#{@local_account_path}/content/#{uuid}"
+    def _local_note_path(local_account_path, note_uuid)
+      "#{local_account_path}/content/#{note_uuid}"
     end
 
-    def _local_note_filesize(uuid)
+    def _local_note_filesize(local_account_path, note_uuid)
       filesize_hash = {
-        'local_note_path': _local_note_path(uuid),
+        'local_note_path': _local_note_path(local_account_path, note_uuid),
         'local_note_size': 0
       }
       Dir.glob([filesize_hash[:local_note_path], '*'].join('/')) do |path|
@@ -108,5 +108,3 @@ ORDER BY note.ZDATEUPDATED DESC;
     end
   end
 end
-
-
